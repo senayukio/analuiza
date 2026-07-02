@@ -13,7 +13,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js"></script><style>
+<script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js"></script>
+<script src="https://www.youtube.com/iframe_api"></script><style>
 *{box-sizing:border-box;}
 html,body{margin:0;padding:0;background:#04050b;}
 body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;}
@@ -185,15 +186,15 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overfl
           <div style="flex:0 0 auto; width:30px; height:30px; border-radius:999px; border:1px solid rgba(255,158,200,0.35); display:flex; align-items:center; justify-content:center;"><div style="width:0; height:0; border-left:8px solid var(--rose); border-top:5px solid transparent; border-bottom:5px solid transparent; margin-left:2px;"></div></div>
         </div>
       </div>
-      <sc-if value="{{ ytPlaying }}" hint-placeholder-val="{{ false }}">
-        <div style="margin-top:14px; border-radius:18px; overflow:hidden; border:1px solid rgba(255,158,200,0.24); box-shadow:0 26px 54px -40px rgba(0,0,0,0.9);">
-          <div style="display:flex; align-items:center; justify-content:space-between; padding:10px 14px; background:rgba(10,12,24,0.6);">
-            <span style="font-family:var(--mono); font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--rose);">{{ ytTitle }}</span>
-            <button onClick="{{ stopYoutube }}" aria-label="parar" style="width:28px; height:28px; border-radius:999px; border:1px solid var(--line); background:rgba(0,0,0,0.35); color:var(--pearl); font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center;">×</button>
-          </div>
-          <iframe src="{{ ytEmbed }}" style="width:100%; aspect-ratio:16/9; border:0; display:block; background:#000;" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen=""></iframe>
+      <div ref="{{ ytBoxRef }}" style="margin-top:14px; border-radius:18px; overflow:hidden; border:1px solid rgba(255,158,200,0.24); box-shadow:0 26px 54px -40px rgba(0,0,0,0.9); max-height:{{ ytMaxH }}; opacity:{{ ytOpacity }}; transition:max-height .5s ease, opacity .4s ease;">
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:10px 14px; background:rgba(10,12,24,0.6);">
+          <span style="font-family:var(--mono); font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--rose);">{{ ytTitle }}</span>
+          <button onClick="{{ stopYoutube }}" aria-label="parar" style="width:28px; height:28px; border-radius:999px; border:1px solid var(--line); background:rgba(0,0,0,0.35); color:var(--pearl); font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center;">×</button>
         </div>
-      </sc-if>
+        <div style="position:relative; width:100%; padding-bottom:56.25%; height:0; background:#000;">
+          <div ref="{{ ytHostRef }}" style="position:absolute; inset:0;"></div>
+        </div>
+      </div>
       <p data-reveal="" data-delay="80" style="font-size:12px; color:var(--muted); margin:18px 0 0;">Você é aquela melodia que meu coração reconhece, pede de novo e nunca se cansa de ouvir.</p>
     </section>
 
@@ -356,12 +357,12 @@ const MOTIVOS = [
 ];
 
 class Component extends DCLogic {
-  state = { modal: null, playing: false, hint: true, arrived: false, started: false, tiltCue: false };
+  state = { modal: null, playing: false, hint: true, arrived: false, started: false, tiltCue: false, ytOpen: false };
 
   renderVals() {
     if (!this.R) {
       const cr = () => React.createRef();
-      this.R = { root: cr(), bg: cr(), heart: cr(), heartPhoto: cr(), audio: cr(), video: cr(), cdD: cr(), cdH: cr(), cdM: cr(), cdS: cr(), arcPath: cr(), arcDot: cr() };
+      this.R = { root: cr(), bg: cr(), heart: cr(), heartPhoto: cr(), audio: cr(), video: cr(), cdD: cr(), cdH: cr(), cdM: cr(), cdS: cr(), arcPath: cr(), arcDot: cr(), ytBox: cr(), ytHost: cr() };
     }
     const nome = this.props.nome || 'Ana Luiza';
     const hasVideo = !!(this.props.videoUrl && String(this.props.videoUrl).trim());
@@ -381,7 +382,7 @@ class Component extends DCLogic {
       nome, motivos, reunionText: this.reunionText(), started: this.state.started, notStarted: !this.state.started, tiltCue: this.state.tiltCue,
       reunionArrived: arrived, reunionLocked: !arrived,
       modalVideo: this.state.modal === 'video', modalLetter: this.state.modal === 'letter',
-      ytPlaying: !!this.state.ytEmbed, ytEmbed: this.state.ytEmbed, ytTitle: this.state.ytTitle,
+      ytTitle: this.state.ytTitle, ytBoxRef: this.R.ytBox, ytHostRef: this.R.ytHost, ytMaxH: this.state.ytOpen ? '560px' : '0px', ytOpacity: this.state.ytOpen ? '1' : '0',
       hasVideo, noVideo: !hasVideo, playing: this.state.playing, showHint: this.state.hint,
       playState: this.state.playing ? 'running' : 'paused',
       hintText: hasAudio ? 'toque para ouvir a nossa música' : 'a nossa música entra aqui',
@@ -467,12 +468,40 @@ class Component extends DCLogic {
   }
 
   openModal(kind) { this.setState({ modal: kind, hint: false }); document.documentElement.style.overflow = 'hidden'; }
+  ensureYT() {
+    if (this._ytPlayer) return;
+    const host = this.R.ytHost && this.R.ytHost.current;
+    if (!host || !(window.YT && window.YT.Player)) return;
+    const mount = document.createElement('div');
+    mount.style.cssText = 'position:absolute; inset:0;';
+    host.appendChild(mount);
+    this._ytPlayer = new window.YT.Player(mount, {
+      width: '100%', height: '100%',
+      playerVars: { playsinline: 1, rel: 0, modestbranding: 1 },
+      events: {
+        onReady: (e) => {
+          this._ytReady = true;
+          const f = e.target.getIframe && e.target.getIframe();
+          if (f) f.style.cssText = 'position:absolute; inset:0; width:100%; height:100%; border:0;';
+          if (this._ytWanted) { try { e.target.loadVideoById(this._ytWanted); } catch (er) {} }
+        }
+      }
+    });
+  }
   playYoutube(id, title) {
     const a = this.R.audio.current; if (a && !a.paused) { try { a.pause(); } catch (e) {} }
-    const embed = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&playsinline=1';
-    this.setState({ ytEmbed: embed, ytTitle: title || '', playing: false, hint: false });
+    this._ytWanted = id;
+    this.setState({ ytTitle: title || '', ytOpen: true, playing: false, hint: false });
+    this.ensureYT();
+    if (this._ytPlayer && this._ytReady && this._ytPlayer.loadVideoById) {
+      try { this._ytPlayer.loadVideoById(id); } catch (e) {}
+    }
   }
-  stopYoutube() { this.setState({ ytEmbed: null, ytTitle: '' }); }
+  stopYoutube() {
+    this._ytWanted = null;
+    if (this._ytPlayer && this._ytPlayer.stopVideo) { try { this._ytPlayer.stopVideo(); } catch (e) {} }
+    this.setState({ ytTitle: '', ytOpen: false });
+  }
   closeModal() { const v = this.R.video.current; if (v) { try { v.pause(); } catch (e) {} } this.setState({ modal: null }); document.documentElement.style.overflow = ''; }
 
   toggleAudio() {
@@ -480,7 +509,7 @@ class Component extends DCLogic {
     if (!a.getAttribute('src') && this.props.audioUrl) a.src = this.props.audioUrl;
     if (!a.getAttribute('src')) { this.setState({ hint: true }); return; }
     if (a.paused) {
-      if (this.state.ytEmbed) this.setState({ ytEmbed: null, ytTitle: '' });
+      this.stopYoutube();
       const p = a.play();
       if (p && p.then) p.then(() => this.setState({ playing: true, hint: false })).catch(() => this.setState({ hint: true }));
       else this.setState({ playing: true, hint: false });
@@ -493,6 +522,7 @@ class Component extends DCLogic {
     this._t0 = performance.now();
     this._scroll = 0; this._mX = 0; this._mY = 0; this._tX = 0; this._tY = 0; this._pX = 0; this._pY = 0;
     if (this.props.audioUrl && this.R.audio.current) this.R.audio.current.src = this.props.audioUrl;
+    window.onYouTubeIframeAPIReady = () => { if (this.state.started) this.ensureYT(); };
     this.setupReveals();
     this.startCountdown();
     this._onScroll = () => { this._scroll = window.scrollY || 0; if (this._checkReveals) this._checkReveals(); };
@@ -516,6 +546,7 @@ class Component extends DCLogic {
   }
 
   componentDidUpdate(prev) {
+    if (this.state.started && !this._ytPlayer) this.ensureYT();
     if (prev.audioUrl !== this.props.audioUrl && this.R.audio.current) {
       this.R.audio.current.src = this.props.audioUrl || '';
       if (this.state.playing) this.setState({ playing: false });
