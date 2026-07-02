@@ -24,6 +24,8 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overfl
 @keyframes eqbar{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
 @keyframes cue{0%{opacity:.15;transform:translateY(0)}50%{opacity:.7}100%{opacity:.15;transform:translateY(7px)}}
 @keyframes shimmer{0%{opacity:.4}50%{opacity:1}100%{opacity:.4}}
+@keyframes scanline{0%{top:-4%}100%{top:104%}}
+@keyframes loadbar{0%{left:-42%}100%{left:102%}}
 </style>
 </helmet>
 <div ref="{{ rootRef }}" style="--serif:'Cormorant Garamond',Georgia,serif; --sans:'Space Grotesk',system-ui,sans-serif; --mono:'Space Mono',ui-monospace,monospace; --blue:oklch(0.68 0.15 250); --blue2:oklch(0.80 0.10 240); --rose:oklch(0.82 0.09 353); --rose2:oklch(0.72 0.13 358); --gold:oklch(0.85 0.08 85); --brown:oklch(0.78 0.075 55); --brown2:oklch(0.52 0.07 48); --pearl:oklch(0.96 0.012 90); --muted:rgba(226,231,255,0.60); --glass:rgba(255,255,255,0.045); --line:rgba(255,255,255,0.09); font-family:var(--sans); color:var(--pearl); position:relative; min-height:100vh; overflow-x:hidden; background:radial-gradient(1000px 760px at 16% 92%, rgba(150,104,60,0.15), transparent 60%),radial-gradient(1200px 820px at 50% -12%, rgba(74,108,240,0.20), transparent 60%), radial-gradient(900px 720px at 82% 24%, rgba(240,170,205,0.11), transparent 55%), linear-gradient(180deg,#070912,#05060e 42%,#04050b);">
@@ -258,6 +260,32 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overfl
       <p data-reveal="" data-delay="120" style="font-family:var(--serif); font-style:italic; font-size:clamp(17px,5vw,21px); line-height:1.6; color:var(--pearl); max-width:30ch; margin:16px auto 0;">Você é brilhante, dedicada e cheia de sonhos lindos. Mas, além de tudo isso, você é a paixão mais bonita que meu coração já teve a sorte de encontrar.</p>
     </section>
 
+    <!-- FASE 3 -->
+    <section id="sec-fase3" data-screen-label="Fase 3" style="max-width:600px; margin:0 auto; padding:20px 22px 90px; text-align:center;">
+      <div data-reveal="" style="font-family:var(--mono); font-size:10.5px; letter-spacing:0.34em; text-transform:uppercase; color:#7fe7ff; margin-bottom:14px; display:flex; align-items:center; justify-content:center; gap:9px;">
+        <span style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#7fe7ff; box-shadow:0 0 12px #7fe7ff; animation:shimmer 1.4s ease-in-out infinite;"></span>Fase 3 · em preparação
+      </div>
+      <h2 data-reveal="" data-delay="60" style="margin:0 0 10px; font-family:var(--serif); font-weight:500; font-size:clamp(27px,7.4vw,42px); line-height:1.14; color:var(--pearl);">Tem uma surpresa<br>vindo do Japão</h2>
+      <p data-reveal="" data-delay="80" style="font-size:14px; line-height:1.7; color:var(--muted); max-width:35ch; margin:0 auto 24px;">Uma caixa de verdade está sendo preparada e vai atravessar o mundo até você. Isto aqui é só o rastreio.</p>
+
+      <div data-reveal="" data-delay="60" style="position:relative; width:100%; max-width:420px; margin:0 auto; border-radius:22px; overflow:hidden; border:1px solid rgba(127,231,255,0.28); background:linear-gradient(180deg,rgba(8,14,26,0.55),rgba(6,10,20,0.9)); box-shadow:0 40px 80px -50px rgba(0,0,0,0.95),inset 0 1px 0 rgba(127,231,255,0.12);">
+        <div style="position:absolute; inset:0; background-image:linear-gradient(rgba(127,231,255,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(127,231,255,0.06) 1px,transparent 1px); background-size:26px 26px; pointer-events:none;"></div>
+        <div style="position:absolute; left:0; right:0; top:0; height:2px; background:linear-gradient(90deg,transparent,rgba(127,231,255,0.85),transparent); animation:scanline 3.4s linear infinite; pointer-events:none;"></div>
+        <canvas ref="{{ giftRef }}" style="position:relative; z-index:1; width:100%; height:300px; display:block;"></canvas>
+        <div style="position:absolute; top:10px; left:12px; font-family:var(--mono); font-size:9px; letter-spacing:0.2em; color:#7fe7ff; opacity:0.85; display:flex; align-items:center; gap:6px;"><span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:#ff5f7a; box-shadow:0 0 8px #ff5f7a; animation:shimmer 1.1s ease-in-out infinite;"></span>REC · AR</div>
+        <div style="position:absolute; top:10px; right:12px; font-family:var(--mono); font-size:11px; letter-spacing:0.14em; color:#7fe7ff; opacity:0.9;">日本 → BR</div>
+        <div style="position:absolute; bottom:10px; left:12px; right:12px; display:flex; align-items:center; justify-content:space-between; font-family:var(--mono); font-size:8.5px; letter-spacing:0.14em; color:#7fe7ff; opacity:0.85;"><span>TÓQUIO 35.6°N</span><span>SCAN 100%</span><span>ETA ✈</span></div>
+      </div>
+
+      <div data-reveal="" data-delay="80" style="max-width:420px; margin:18px auto 0; text-align:left;">
+        <div style="display:flex; justify-content:space-between; font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:8px;"><span style="color:#7fe7ff;">carregando fase 3</span><span style="color:var(--muted);">sincronizando com Tóquio…</span></div>
+        <div style="position:relative; height:6px; border-radius:999px; background:rgba(127,231,255,0.12); overflow:hidden;">
+          <div style="position:absolute; top:0; bottom:0; left:-42%; width:42%; border-radius:999px; background:linear-gradient(90deg,transparent,#7fe7ff,transparent); animation:loadbar 2.2s ease-in-out infinite;"></div>
+        </div>
+      </div>
+      <p data-reveal="" data-delay="100" style="font-family:var(--serif); font-style:italic; font-size:15px; color:var(--muted); text-align:center; margin:22px auto 0; max-width:32ch;">quando ela chegar, vai ter um pedaço do Japão — e de mim — dentro dela.</p>
+    </section>
+
     <footer style="text-align:center; padding:24px 22px 72px;">
       <div data-reveal="" style="display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px 16px; font-family:var(--mono); font-size:10px; letter-spacing:0.14em; color:var(--muted); margin-bottom:18px;">
         <span><span style="color:var(--rose);">21.09</span> nos conhecemos</span><span style="opacity:0.4;">·</span><span><span style="color:var(--brown);">24.12</span> o sim</span><span style="opacity:0.4;">·</span><span><span style="color:var(--blue2);">02.09</span> o reencontro</span>
@@ -363,7 +391,7 @@ class Component extends DCLogic {
   renderVals() {
     if (!this.R) {
       const cr = () => React.createRef();
-      this.R = { root: cr(), bg: cr(), heart: cr(), heartPhoto: cr(), audio: cr(), video: cr(), cdD: cr(), cdH: cr(), cdM: cr(), cdS: cr(), arcPath: cr(), arcDot: cr(), ytBox: cr(), ytHost: cr() };
+      this.R = { root: cr(), bg: cr(), heart: cr(), heartPhoto: cr(), audio: cr(), video: cr(), cdD: cr(), cdH: cr(), cdM: cr(), cdS: cr(), arcPath: cr(), arcDot: cr(), ytBox: cr(), ytHost: cr(), gift: cr() };
     }
     const nome = this.props.nome || 'Ana Luiza';
     const hasVideo = !!(this.props.videoUrl && String(this.props.videoUrl).trim());
@@ -379,7 +407,7 @@ class Component extends DCLogic {
       rootRef: this.R.root, bgRef: this.R.bg, heartRef: this.R.heart, heartPhotoRef: this.R.heartPhoto,
       audioRef: this.R.audio, videoRef: this.R.video,
       cdDaysRef: this.R.cdD, cdHoursRef: this.R.cdH, cdMinsRef: this.R.cdM, cdSecsRef: this.R.cdS,
-      arcPathRef: this.R.arcPath, arcDotRef: this.R.arcDot,
+      arcPathRef: this.R.arcPath, arcDotRef: this.R.arcDot, giftRef: this.R.gift,
       nome, motivos, reunionText: this.reunionText(), started: this.state.started, notStarted: !this.state.started, tiltCue: this.state.tiltCue,
       reunionArrived: arrived, reunionLocked: !arrived,
       modalVideo: this.state.modal === 'video', modalLetter: this.state.modal === 'letter',
@@ -554,6 +582,7 @@ class Component extends DCLogic {
 
   componentDidUpdate(prev) {
     if (this.state.started && !this._ytPlayer) this.ensureYT();
+    if (this.state.started && !this.gift && window.THREE) { try { this.initGift(); setTimeout(() => this.resizeGift(), 60); } catch (e) { console.warn('gift init failed', e); } }
     if (prev.audioUrl !== this.props.audioUrl && this.R.audio.current) {
       this.R.audio.current.src = this.props.audioUrl || '';
       if (this.state.playing) this.setState({ playing: false });
@@ -827,12 +856,60 @@ class Component extends DCLogic {
     d.setAttribute('opacity', (0.35 + 0.65 * Math.sin(prog * Math.PI)).toFixed(2));
   }
 
+  initGift() {
+    const T = window.THREE; const c = this.R.gift && this.R.gift.current; if (!c) return;
+    const r = this.makeRenderer(c);
+    const scene = new T.Scene();
+    const cam = new T.PerspectiveCamera(42, 1, 0.1, 100); cam.position.set(0, 1.5, 6.4); cam.lookAt(0, 0.1, 0);
+    const grp = new T.Group();
+    const cyan = 0x8fe9ff;
+    const boxGeo = new T.BoxGeometry(2, 2, 2);
+    grp.add(new T.Mesh(boxGeo, new T.MeshBasicMaterial({ color: cyan, transparent: true, opacity: 0.06, depthWrite: false })));
+    grp.add(new T.LineSegments(new T.EdgesGeometry(boxGeo), new T.LineBasicMaterial({ color: cyan, transparent: true, opacity: 0.92, blending: T.AdditiveBlending })));
+    const ribMat = new T.MeshBasicMaterial({ color: cyan, transparent: true, opacity: 0.2, depthWrite: false, blending: T.AdditiveBlending });
+    grp.add(new T.Mesh(new T.BoxGeometry(0.46, 2.06, 2.06), ribMat));
+    grp.add(new T.Mesh(new T.BoxGeometry(2.06, 2.06, 0.46), ribMat));
+    const bowMat = new T.LineBasicMaterial({ color: cyan, transparent: true, opacity: 0.95, blending: T.AdditiveBlending });
+    const loop = new T.EdgesGeometry(new T.TorusGeometry(0.36, 0.13, 6, 18));
+    const bowL = new T.LineSegments(loop, bowMat); bowL.position.set(-0.34, 1.2, 0); bowL.rotation.z = 0.5; bowL.scale.set(1, 1.5, 1);
+    const bowR = new T.LineSegments(loop, bowMat); bowR.position.set(0.34, 1.2, 0); bowR.rotation.z = -0.5; bowR.scale.set(1, 1.5, 1);
+    grp.add(bowL); grp.add(bowR);
+    const glow = new T.Sprite(new T.SpriteMaterial({ map: this.glowTex(), color: cyan, transparent: true, opacity: 0.4, blending: T.AdditiveBlending, depthWrite: false }));
+    glow.scale.set(6, 6, 1); glow.position.z = -1.4; grp.add(glow);
+    scene.add(grp);
+    const N = 90;
+    const sp = new Float32Array(N * 3);
+    for (let i = 0; i < N; i++) { sp[i*3]=(Math.random()-0.5)*7; sp[i*3+1]=(Math.random()-0.5)*5; sp[i*3+2]=(Math.random()-0.5)*4; }
+    const sg = new T.BufferGeometry(); sg.setAttribute('position', new T.BufferAttribute(sp, 3));
+    const spark = new T.Points(sg, new T.PointsMaterial({ size: 0.06, map: this.softTex(), color: cyan, transparent: true, opacity: 0.6, blending: T.AdditiveBlending, depthWrite: false }));
+    scene.add(spark);
+    this.gift = { r, scene, cam, grp, spark };
+    this.resizeGift();
+  }
+  resizeGift() {
+    if (!this.gift) return;
+    const c = this.R.gift.current; if (!c) return;
+    const w = c.clientWidth || 360, h = c.clientHeight || 300;
+    this.gift.r.setSize(w, h, false);
+    this.gift.cam.aspect = w / h; this.gift.cam.updateProjectionMatrix();
+  }
+  updateGift(t) {
+    const g = this.gift; if (!g) return;
+    g.grp.rotation.y = t * 0.55;
+    g.grp.rotation.x = -0.14 + Math.sin(t * 0.6) * 0.06;
+    g.grp.position.y = Math.sin(t * 0.9) * 0.12;
+    g.spark.rotation.y = -t * 0.12;
+    g.r.render(g.scene, g.cam);
+  }
+
   updateVisibility() {
     const vh = window.innerHeight;
     const hc = this.R.heart.current;
     if (hc) { const r = hc.getBoundingClientRect(); this.heartVisible = r.bottom > -60 && r.top < vh + 60; }
     const ds = document.getElementById('sec-distancia');
     if (ds) { const r = ds.getBoundingClientRect(); this.arcVisible = r.bottom > -40 && r.top < vh + 40; }
+    const gf = document.getElementById('sec-fase3');
+    if (gf) { const r = gf.getBoundingClientRect(); this.giftVisible = r.bottom > -60 && r.top < vh + 60; }
     if (this._checkReveals) this._checkReveals();
   }
 
@@ -848,7 +925,7 @@ class Component extends DCLogic {
 
   resizeAll() {
     this.mobile = Math.min(window.innerWidth, window.innerHeight) < 620 || window.innerWidth < 720;
-    this.resizeBG(); this.resizeHeart(); this._arcLen = 0;
+    this.resizeBG(); this.resizeHeart(); this.resizeGift(); this._arcLen = 0;
   }
 
   loop() {
@@ -864,6 +941,7 @@ class Component extends DCLogic {
     if (this.bg) this.updateBG(t);
     if (this.heart && this.heartVisible) this.updateHeart(t);
     if (this.arcVisible) this.updateArc(t);
+    if (this.gift && this.giftVisible) this.updateGift(t);
   }
 }
 </script>
