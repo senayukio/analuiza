@@ -33,7 +33,7 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overfl
 
     <!-- HERO -->
     <section id="sec-hero" data-screen-label="Hero" style="min-height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:48px 22px 36px; position:relative;">
-      <div data-reveal="scale" data-depth="34" style="position:relative; width:min(86vw,400px); height:min(86vw,400px); margin-bottom:-8px; display:flex; align-items:center; justify-content:center;">
+      <div data-reveal="scale" data-depth="78" style="position:relative; width:min(86vw,400px); height:min(86vw,400px); margin-bottom:-8px; display:flex; align-items:center; justify-content:center;">
         <canvas ref="{{ heartRef }}" style="position:absolute; inset:0; width:100%; height:100%; display:block; -webkit-mask-image:radial-gradient(circle at 50% 50%,#000 68%,transparent 92%); mask-image:radial-gradient(circle at 50% 50%,#000 68%,transparent 92%);"></canvas>
         <div style="position:absolute; width:70%; height:70%; border-radius:50%; background:radial-gradient(circle, rgba(255,120,170,0.30), rgba(217,168,119,0.12) 52%, transparent 72%); filter:blur(10px); pointer-events:none;"></div>
         <img ref="{{ heartPhotoRef }}" src="assets/ana-heart.png" alt="Ana Luiza sorrindo" style="position:relative; z-index:1; width:63%; height:63%; object-fit:contain; filter:drop-shadow(0 8px 22px rgba(0,0,0,0.4)); will-change:transform;">
@@ -44,7 +44,9 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overfl
         <p data-reveal="" data-delay="80" style="margin:0; font-size:clamp(15px,4.4vw,18px); line-height:1.65; color:var(--muted); max-width:32ch;">21 anos hoje. E eu, com sorte de te amar em todos os que ainda vêm.</p>
         <div data-reveal="" data-delay="140" style="font-family:var(--serif); font-style:italic; font-size:16px; color:var(--rose); opacity:0.94;">"bom dia, flor do dia."</div>
         <button data-reveal="" data-delay="200" onClick="{{ startSurprise }}" style="margin-top:6px; font-family:var(--sans); font-size:14px; font-weight:500; letter-spacing:0.02em; color:var(--pearl); padding:15px 32px; border-radius:999px; border:1px solid rgba(255,255,255,0.18); background:linear-gradient(180deg,rgba(255,255,255,0.13),rgba(255,255,255,0.04)); backdrop-filter:blur(10px); cursor:pointer; box-shadow:0 0 0 1px rgba(255,150,190,0.12),0 18px 50px -22px rgba(255,150,190,0.85),inset 0 1px 0 rgba(255,255,255,0.2); transition:transform .25s, box-shadow .25s; -webkit-tap-highlight-color:transparent;" style-hover="transform:translateY(-2px); box-shadow:0 0 0 1px rgba(255,175,205,0.3),0 26px 62px -20px rgba(255,165,200,1),inset 0 1px 0 rgba(255,255,255,0.32);" style-active="transform:translateY(0) scale(0.98);">começar</button>
-        <div data-reveal="" data-delay="300" style="font-family:var(--mono); font-size:9px; letter-spacing:0.26em; text-transform:uppercase; color:var(--muted); display:flex; align-items:center; gap:7px;"><span style="display:inline-block; width:6px; height:6px; border:1px solid var(--blue2); border-radius:50%; animation:shimmer 2.6s ease-in-out infinite;"></span>incline o celular para explorar</div>
+        <sc-if value="{{ started }}" hint-placeholder-val="{{ true }}">
+        <div data-delay="300" style="font-family:var(--mono); font-size:9px; letter-spacing:0.26em; text-transform:uppercase; color:var(--muted); display:flex; align-items:center; gap:7px;"><span style="display:inline-block; width:6px; height:6px; border:1px solid var(--blue2); border-radius:50%; animation:shimmer 2.6s ease-in-out infinite;"></span>scrole a tela pra ver a surpresa</div>
+        </sc-if>
       </div>
     </section>
 
@@ -279,8 +281,8 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overfl
 
   <!-- TILT CUE -->
   <sc-if value="{{ tiltCue }}" hint-placeholder-val="{{ false }}">
-    <div style="position:fixed; left:50%; bottom:92px; transform:translateX(-50%); z-index:70; pointer-events:none; display:flex; align-items:center; gap:10px; font-family:var(--mono); font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--pearl); background:rgba(10,12,26,0.74); border:1px solid var(--line); backdrop-filter:blur(12px); padding:12px 18px; border-radius:999px; box-shadow:0 18px 40px -22px rgba(0,0,0,0.9); animation:floaty 2.4s ease-in-out infinite; white-space:nowrap;">
-      <span style="font-size:16px;">📱</span>incline o celular pra explorar
+    <div style="position:fixed; left:50%; top:44%; transform:translate(-50%,-50%); z-index:70; pointer-events:none; display:flex; align-items:center; gap:9px; font-family:var(--mono); font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--pearl); background:rgba(10,12,26,0.78); border:1px solid var(--line); backdrop-filter:blur(12px); padding:11px 16px; border-radius:999px; box-shadow:0 18px 40px -22px rgba(0,0,0,0.9); animation:floaty 2.4s ease-in-out infinite; white-space:nowrap;">
+      <span style="font-size:15px;">📱</span>incline o celular
     </div>
   </sc-if>
 
@@ -800,7 +802,7 @@ class Component extends DCLogic {
     for (let i = 0; i < this._pLayers.length; i++) {
       const el = this._pLayers[i];
       const dep = parseFloat(el.getAttribute('data-depth')) || 0;
-      el.style.transform = 'translate3d(' + (this._pX * dep).toFixed(1) + 'px,' + (this._pY * dep * 0.5).toFixed(1) + 'px,0)';
+      el.style.transform = 'translate3d(' + (this._pX * dep).toFixed(1) + 'px,' + (this._pY * dep * 0.9).toFixed(1) + 'px,0)';
     }
   }
 
