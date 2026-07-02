@@ -20,6 +20,7 @@ html,body{margin:0;padding:0;background:#04050b;}
 body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;}
 ::selection{background:rgba(255,158,194,0.28);color:#fff;}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes tiltpulse{0%,100%{transform:translate(-50%,-50%) scale(1);box-shadow:0 16px 36px -20px rgba(0,0,0,0.9),0 0 20px 2px rgba(255,158,194,0.18)}50%{transform:translate(-50%,-54%) scale(1.06);box-shadow:0 16px 36px -20px rgba(0,0,0,0.9),0 0 36px 7px rgba(255,158,194,0.45)}}
 @keyframes eqbar{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
 @keyframes cue{0%{opacity:.15;transform:translateY(0)}50%{opacity:.7}100%{opacity:.15;transform:translateY(7px)}}
 @keyframes shimmer{0%{opacity:.4}50%{opacity:1}100%{opacity:.4}}
@@ -284,8 +285,8 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overfl
 
   <!-- TILT CUE -->
   <sc-if value="{{ tiltCue }}" hint-placeholder-val="{{ false }}">
-    <div style="position:fixed; left:50%; top:44%; transform:translate(-50%,-50%); z-index:70; pointer-events:none; display:flex; align-items:center; gap:9px; font-family:var(--mono); font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--pearl); background:rgba(10,12,26,0.78); border:1px solid var(--line); backdrop-filter:blur(12px); padding:11px 16px; border-radius:999px; box-shadow:0 18px 40px -22px rgba(0,0,0,0.9); animation:floaty 2.4s ease-in-out infinite; white-space:nowrap;">
-      <span style="font-size:15px;">📱</span>incline o celular
+    <div style="position:fixed; left:50%; top:45%; transform:translate(-50%,-50%); z-index:70; pointer-events:none; display:flex; align-items:center; gap:11px; font-family:var(--mono); font-size:12.5px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--pearl); background:rgba(14,16,32,0.9); border:1px solid rgba(255,158,194,0.55); backdrop-filter:blur(12px); padding:14px 22px; border-radius:999px; animation:tiltpulse 1.7s ease-in-out infinite; white-space:nowrap;">
+      <span style="font-size:19px;">📱</span>incline o celular
     </div>
   </sc-if>
 
@@ -413,8 +414,9 @@ class Component extends DCLogic {
   startSurprise() {
     this.enableTilt();
     const cue = !!this.mobile;
+    this._cueDone = false;
     if (!this.state.started) this.setState({ started: true, tiltCue: cue });
-    if (cue) { clearTimeout(this._tiltCueTO); this._tiltCueTO = setTimeout(() => this.setState({ tiltCue: false }), 3000); }
+    if (cue) { clearTimeout(this._tiltCueTO); this._tiltCueTO = setTimeout(() => { this._cueDone = true; this.setState({ tiltCue: false }); }, 12000); }
     setTimeout(() => { this._pLayers = null; if (this._checkReveals) this._checkReveals(); }, 80);
   }
 
@@ -535,6 +537,9 @@ class Component extends DCLogic {
       if (e.gamma == null && e.beta == null) return;
       this._tX = Math.max(-1, Math.min(1, (e.gamma || 0) / 24));
       this._tY = Math.max(-1, Math.min(1, ((e.beta || 0) - 40) / 30));
+      if (!this._cueDone && this.state.tiltCue && (Math.abs(e.gamma || 0) > 12 || Math.abs((e.beta || 0) - 40) > 16)) {
+        this._cueDone = true; clearTimeout(this._tiltCueTO); this.setState({ tiltCue: false });
+      }
     };
     this._onKey = (e) => { if (e.key === 'Escape' && this.state.modal) this.closeModal(); };
     window.addEventListener('keydown', this._onKey);
