@@ -38,7 +38,7 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overfl
         <div style="position:absolute; width:70%; height:70%; border-radius:50%; background:radial-gradient(circle, rgba(255,120,170,0.30), rgba(217,168,119,0.12) 52%, transparent 72%); filter:blur(10px); pointer-events:none;"></div>
         <img ref="{{ heartPhotoRef }}" src="assets/ana-heart.png" alt="Ana Luiza sorrindo" style="position:relative; z-index:1; width:63%; height:63%; object-fit:contain; filter:drop-shadow(0 8px 22px rgba(0,0,0,0.4)); will-change:transform;">
       </div>
-      <div data-depth="22" style="display:flex; flex-direction:column; align-items:center; gap:18px; max-width:540px;">
+      <div data-depth="0" style="display:flex; flex-direction:column; align-items:center; gap:18px; max-width:540px;">
         <div data-reveal="" style="font-family:var(--mono); font-size:11px; letter-spacing:0.32em; text-transform:uppercase; color:var(--blue2);">uma mensagem do outro lado do mundo</div>
         <h1 data-reveal="" style="margin:0; font-family:var(--serif); font-weight:500; font-size:clamp(40px,11vw,72px); line-height:1.0; letter-spacing:-0.01em; color:var(--pearl); text-shadow:0 2px 44px rgba(255,140,190,0.28);">Feliz 21 anos,<br><em style="font-style:italic; font-weight:600; background:linear-gradient(100deg,#ffffff,var(--rose) 52%,var(--blue2)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; padding-right:.06em;">{{ nome }}</em></h1>
         <p data-reveal="" data-delay="80" style="margin:0; font-size:clamp(15px,4.4vw,18px); line-height:1.65; color:var(--muted); max-width:32ch;">21 anos hoje. E eu, com sorte de te amar em todos os que ainda vêm.</p>
@@ -48,11 +48,14 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overfl
       </div>
     </section>
 
+    <sc-if value="{{ started }}" hint-placeholder-val="{{ true }}">
+    <div>
+
     <!-- 21.09 — ONDE COMEÇOU -->
     <section id="sec-inicio" data-screen-label="Onde começou" style="max-width:600px; margin:0 auto; padding:70px 22px 84px;">
       <div data-reveal="" style="font-family:var(--mono); font-size:10.5px; letter-spacing:0.3em; text-transform:uppercase; color:var(--blue2); margin-bottom:14px; text-align:center;">21.09.2025&nbsp;·&nbsp;onde tudo começou</div>
       <h2 data-reveal="" style="margin:0 0 26px; font-family:var(--serif); font-weight:500; font-size:clamp(28px,7.6vw,44px); line-height:1.1; color:var(--pearl); text-align:center;">Você chegou numa festa</h2>
-      <p data-reveal="" data-delay="60" style="font-size:clamp(14px,4.2vw,16.5px); line-height:1.8; color:var(--muted); margin:0 0 18px;">Era o aniversário da minha mãe, os 80 do meu avô. Minha tia te apresentou e você ficou sem graça — só depois eu soube que era o zíper do vestido. Eu, achei que você não queria papo.</p>
+      <p data-reveal="" data-delay="60" style="font-size:clamp(14px,4.2vw,16.5px); line-height:1.8; color:var(--muted); margin:0 0 18px;">Era o aniversário da minha mãe, os 80 do meu avô. Minha tia te apresentou e você ficou sem graça — só depois eu soube que era o zíper do vestido. Eu, achei que você não queria papo. Mas, como sou teimoso, depois de um tempo tentei puxar papo de novo.</p>
       <p data-reveal="" data-delay="80" style="font-size:clamp(14px,4.2vw,16.5px); line-height:1.8; color:var(--muted); margin:0 0 26px;">Aí a gente cantou juntos eram cem ovelhas e eu me apaixonei pela sua voz. A gente sentou num sofá onde a mágica aconteceu e conversou por horas. Você me falou do sonho de ser médica.</p>
       <div data-reveal="" data-delay="60" style="border-left:2px solid var(--rose); padding:4px 0 4px 20px; margin:0 0 26px;">
         <div style="font-family:var(--serif); font-style:italic; font-size:clamp(17px,5vw,21px); line-height:1.5; color:var(--pearl);">"Era uma festa, eram sorrisos no ar,<br>e eu sem saber o que eu iria encontrar…"</div>
@@ -61,7 +64,7 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overfl
       <div data-reveal="" data-delay="80" style="border:1px solid var(--line); border-radius:18px; overflow:hidden; box-shadow:inset 0 1px 0 rgba(255,255,255,0.06);">
         
       </div>
-      <p data-reveal="" data-delay="80" style="font-size:14px; line-height:1.7; color:var(--muted); margin:24px 0 0; text-align:center;">No dia seguinte, você saiu no meio da aula do cursinho só pra me ver de novo — sua mãe disse que era a última chance. <span style="color:var(--rose);">Ainda bem que você veio.</span></p>
+      <p data-reveal="" data-delay="80" style="font-size:14px; line-height:1.7; color:var(--muted); margin:24px 0 0; text-align:center;">No dia seguinte, você saiu no meio da aula do cursinho só pra me ver de novo — sua mãe disse que era a última chance de nos conhecermos. <span style="color:var(--rose);">Ainda bem que você veio.</span></p>
     </section>
 
     <!-- DISTÂNCIA -->
@@ -92,14 +95,14 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overfl
       <div data-reveal="" data-delay="60" style="border-left:2px solid var(--blue2); padding:4px 0 4px 20px; margin:0 auto 24px; max-width:44ch; text-align:left;">
         <div style="font-family:var(--serif); font-style:italic; font-size:clamp(16px,4.6vw,20px); line-height:1.5; color:var(--pearl);">"Do Japão eu te via pelas vídeo chamadas,<br>nas tuas caras e bocas, eu me apaixonava…"</div>
       </div>
-      <p data-reveal="" data-delay="80" style="font-size:clamp(15px,4.4vw,17px); line-height:1.7; color:var(--pearl); max-width:34ch; margin:0 auto; font-family:var(--serif); font-style:italic;">A gente olha pro mesmo céu. E eu te mando amor em cada estrela.</p><img src="assets/distancia.jpg" alt="quando a gente se conheceu" style="display:block; width:100%; height:auto; object-fit:contain; border-radius:18px; margin-top:8px;">
+      <img src="assets/distancia.jpg" alt="quando a gente se conheceu" style="display:block; width:100%; height:auto; object-fit:contain; border-radius:18px; margin-top:8px;"><p data-reveal="" data-delay="80" style="font-size:clamp(15px,4.4vw,17px); line-height:1.7; color:var(--pearl); max-width:34ch; margin:18px auto 0; font-family:var(--serif); font-style:italic;">A gente olha pro mesmo céu. E eu te mando amor em cada estrela.</p>
     </section>
 
     <!-- 24.12 — O PEDIDO -->
     <section id="sec-pedido" data-screen-label="O pedido" style="max-width:600px; margin:0 auto; padding:20px 22px 84px;">
       <div data-reveal="" style="font-family:var(--mono); font-size:10.5px; letter-spacing:0.3em; text-transform:uppercase; color:var(--brown); margin-bottom:14px; text-align:center;">24.12.2025&nbsp;·&nbsp;o sim</div>
       <h2 data-reveal="" style="margin:0 0 26px; font-family:var(--serif); font-weight:500; font-size:clamp(28px,7.6vw,44px); line-height:1.1; color:var(--pearl); text-align:center;">Aí eu voltei — só pra te pedir uma coisa</h2>
-      <p data-reveal="" data-delay="60" style="font-size:clamp(14px,4.2vw,16.5px); line-height:1.8; color:var(--muted); margin:0 0 18px;">O plano era o Pontão. Fechou na véspera de Natal. E eu fiquei desesperado achando que ia dar tudo errado... Então seu irmão me ajudou com o letreiro e as pétalas, e em cima da manta estendida,</p>
+      <p data-reveal="" data-delay="60" style="font-size:clamp(14px,4.2vw,16.5px); line-height:1.8; color:var(--muted); margin:0 0 18px;">O plano era o Pontão. Fechou na véspera de Natal. Ainda descobri que tinha comprado a aliança no tamanho errado — e, no dia, esqueci de levá-la pro pedido. E eu fiquei desesperado achando que ia dar tudo errado... Então seu irmão me ajudou com o letreiro e as pétalas, e em cima da manta estendida,</p>
       <p data-reveal="" data-delay="80" style="font-size:clamp(14px,4.2vw,16.5px); line-height:1.8; color:var(--muted); margin:0 0 26px;">Peguei o violão, cantei a nossa música e li uma carta pra você. A gente viu o sol se pôr. <span style="color:var(--rose);">E você disse sim.</span></p>
       <div data-reveal="" data-delay="60" style="border:1px solid rgba(255,158,200,0.24); border-radius:20px; overflow:hidden; box-shadow:0 30px 60px -44px rgba(0,0,0,0.9),inset 0 1px 0 rgba(255,255,255,0.07);">
         <img src="assets/pedido.jpeg" alt="aquele pôr do sol" style="width:100%; height:300px; display:block; object-fit:cover;">
@@ -256,9 +259,12 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overfl
       <div style="font-family:var(--serif); font-style:italic; font-size:17px; color:var(--pearl);">feito do Japão, com amor</div>
       <div style="font-size:12px; color:var(--muted); margin-top:6px;">pros seus 21, minha flor do dia.</div>
     </footer>
+    </div>
+    </sc-if>
   </div>
 
   <!-- MUSIC -->
+  <sc-if value="{{ started }}" hint-placeholder-val="{{ true }}">
   <div style="position:fixed; right:16px; bottom:16px; z-index:60; display:flex; align-items:center; gap:10px;">
     <sc-if value="{{ showHint }}" hint-placeholder-val="{{ false }}">
       <div style="font-family:var(--mono); font-size:10px; letter-spacing:0.06em; color:var(--pearl); background:rgba(10,12,26,0.7); border:1px solid var(--line); backdrop-filter:blur(10px); padding:8px 12px; border-radius:999px; max-width:210px; box-shadow:0 14px 30px -20px rgba(0,0,0,0.9);">{{ hintText }}</div>
@@ -269,6 +275,14 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overfl
       <span style="display:inline-block; width:3px; height:16px; border-radius:2px; background:var(--rose); transform-origin:bottom; animation:eqbar .9s ease-in-out infinite .34s; animation-play-state:{{ playState }};"></span>
     </button>
   </div>
+  </sc-if>
+
+  <!-- TILT CUE -->
+  <sc-if value="{{ tiltCue }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed; left:50%; bottom:92px; transform:translateX(-50%); z-index:70; pointer-events:none; display:flex; align-items:center; gap:10px; font-family:var(--mono); font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--pearl); background:rgba(10,12,26,0.74); border:1px solid var(--line); backdrop-filter:blur(12px); padding:12px 18px; border-radius:999px; box-shadow:0 18px 40px -22px rgba(0,0,0,0.9); animation:floaty 2.4s ease-in-out infinite; white-space:nowrap;">
+      <span style="font-size:16px;">📱</span>incline o celular pra explorar
+    </div>
+  </sc-if>
 
   <!-- MEDIA MODAL (song video) -->
   <sc-if value="{{ modalVideo }}" hint-placeholder-val="{{ false }}">
@@ -338,7 +352,7 @@ const MOTIVOS = [
 ];
 
 class Component extends DCLogic {
-  state = { modal: null, playing: false, hint: true, arrived: false };
+  state = { modal: null, playing: false, hint: true, arrived: false, started: false, tiltCue: false };
 
   renderVals() {
     if (!this.R) {
@@ -360,7 +374,7 @@ class Component extends DCLogic {
       audioRef: this.R.audio, videoRef: this.R.video,
       cdDaysRef: this.R.cdD, cdHoursRef: this.R.cdH, cdMinsRef: this.R.cdM, cdSecsRef: this.R.cdS,
       arcPathRef: this.R.arcPath, arcDotRef: this.R.arcDot,
-      nome, motivos, reunionText: this.reunionText(),
+      nome, motivos, reunionText: this.reunionText(), started: this.state.started, tiltCue: this.state.tiltCue,
       reunionArrived: arrived, reunionLocked: !arrived,
       modalVideo: this.state.modal === 'video', modalLetter: this.state.modal === 'letter',
       ytPlaying: !!this.state.ytEmbed, ytEmbed: this.state.ytEmbed, ytTitle: this.state.ytTitle,
@@ -391,7 +405,13 @@ class Component extends DCLogic {
     } catch (e) { return '02 de setembro · 23:55'; }
   }
 
-  startSurprise() { this.enableTilt(); this.scrollTo('sec-inicio'); }
+  startSurprise() {
+    this.enableTilt();
+    const cue = !!this.mobile;
+    if (!this.state.started) this.setState({ started: true, tiltCue: cue });
+    if (cue) { clearTimeout(this._tiltCueTO); this._tiltCueTO = setTimeout(() => this.setState({ tiltCue: false }), 5200); }
+    setTimeout(() => { this._pLayers = null; if (this._checkReveals) this._checkReveals(); }, 80);
+  }
 
   enableTilt() {
     if (this._tiltReq) return;
@@ -438,8 +458,8 @@ class Component extends DCLogic {
   scrollTo(id) {
     const el = document.getElementById(id);
     if (!el) return;
-    const y = el.getBoundingClientRect().top + window.scrollY - 8;
-    window.scrollTo({ top: y, behavior: this.reduced ? 'auto' : 'smooth' });
+    try { el.scrollIntoView({ behavior: this.reduced ? 'auto' : 'smooth', block: 'start' }); }
+    catch (e) { el.scrollIntoView(); }
   }
 
   openModal(kind) { this.setState({ modal: kind, hint: false }); document.documentElement.style.overflow = 'hidden'; }
@@ -583,6 +603,20 @@ class Component extends DCLogic {
     x.fillStyle = g; x.fillRect(0, 0, 64, 64);
     this._soft = new T.CanvasTexture(c); return this._soft;
   }
+  glowTex() {
+    const T = window.THREE;
+    if (this._glow) return this._glow;
+    const c = document.createElement('canvas'); c.width = c.height = 128;
+    const x = c.getContext('2d');
+    const g = x.createRadialGradient(64, 64, 0, 64, 64, 64);
+    g.addColorStop(0, 'rgba(255,255,255,0.85)');
+    g.addColorStop(0.25, 'rgba(255,255,255,0.34)');
+    g.addColorStop(0.55, 'rgba(255,255,255,0.08)');
+    g.addColorStop(0.8, 'rgba(255,255,255,0.015)');
+    g.addColorStop(1, 'rgba(255,255,255,0)');
+    x.fillStyle = g; x.fillRect(0, 0, 128, 128);
+    this._glow = new T.CanvasTexture(c); return this._glow;
+  }
   heartTex() {
     const T = window.THREE;
     if (this._heartTex) return this._heartTex;
@@ -697,8 +731,8 @@ class Component extends DCLogic {
     geo.center();
     const pts = new T.Points(geo, new T.PointsMaterial({ size: this.mobile ? 0.062 : 0.05, map: this.softTex(), transparent: true, vertexColors: true, blending: T.AdditiveBlending, depthWrite: false, opacity: 0.95, sizeAttenuation: true }));
     g.add(pts);
-    const glow = new T.Sprite(new T.SpriteMaterial({ map: this.softTex(), color: 0xff5f9a, transparent: true, opacity: 0.5, blending: T.AdditiveBlending, depthWrite: false }));
-    glow.scale.set(5.4, 5.4, 1); glow.position.z = -1; g.add(glow);
+    const glow = new T.Sprite(new T.SpriteMaterial({ map: this.glowTex(), color: 0xff5f9a, transparent: true, opacity: 0.3, blending: T.AdditiveBlending, depthWrite: false }));
+    glow.scale.set(4.8, 4.8, 1); glow.position.z = -1; g.add(glow);
     g.scale.setScalar(1.15);
     this._heartGlow = glow;
     return g;
@@ -722,18 +756,22 @@ class Component extends DCLogic {
   updateHeart(t) {
     const H = this.heart; if (!H) return;
     let beat = 0;
-    if (!this.reduced) {
+    {
       const p = (t % 1.15) / 1.15;
       beat = Math.exp(-Math.pow((p - 0.12) / 0.05, 2)) + 0.6 * Math.exp(-Math.pow((p - 0.34) / 0.05, 2));
       const s = 1.15 * (1 + 0.045 * beat);
       H.grp.scale.setScalar(s);
       H.grp.rotation.y = this._pX * 0.42 + Math.sin(t * 0.25) * 0.06;
       H.grp.rotation.x = -0.02 + this._pY * 0.26;
-      if (this._heartGlow) this._heartGlow.material.opacity = 0.42 + 0.18 * beat;
+      if (this._heartGlow) {
+        const gt = 0.24 + 0.09 * beat;
+        this._glowV = (this._glowV == null) ? gt : this._glowV + (gt - this._glowV) * 0.10;
+        this._heartGlow.material.opacity = this._glowV;
+      }
     }
     H.r.render(H.scene, H.cam);
     const ph = this.R.heartPhoto && this.R.heartPhoto.current;
-    if (ph && !this.reduced) ph.style.transform = 'scale(' + (1 + 0.032 * beat).toFixed(3) + ')';
+    if (ph) ph.style.transform = 'scale(' + (1 + 0.032 * beat).toFixed(3) + ')';
   }
 
   updateArc(t) {
