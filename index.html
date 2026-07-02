@@ -413,7 +413,9 @@ class Component extends DCLogic {
 
   startSurprise() {
     this.enableTilt();
-    const cue = !!this.mobile;
+    const coarse = !!(window.matchMedia && matchMedia('(pointer: coarse)').matches);
+    const touch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    const cue = !!this.mobile && touch && coarse && !!window.DeviceOrientationEvent;
     this._cueDone = false;
     if (!this.state.started) this.setState({ started: true, tiltCue: cue });
     if (cue) { clearTimeout(this._tiltCueTO); this._tiltCueTO = setTimeout(() => { this._cueDone = true; this.setState({ tiltCue: false }); }, 12000); }
