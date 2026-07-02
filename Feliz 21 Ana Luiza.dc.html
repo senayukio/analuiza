@@ -43,8 +43,10 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overfl
         <h1 data-reveal="" style="margin:0; font-family:var(--serif); font-weight:500; font-size:clamp(40px,11vw,72px); line-height:1.0; letter-spacing:-0.01em; color:var(--pearl); text-shadow:0 2px 44px rgba(255,140,190,0.28);">Feliz 21 anos,<br><em style="font-style:italic; font-weight:600; background:linear-gradient(100deg,#ffffff,var(--rose) 52%,var(--blue2)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; padding-right:.06em;">{{ nome }}</em></h1>
         <p data-reveal="" data-delay="80" style="margin:0; font-size:clamp(15px,4.4vw,18px); line-height:1.65; color:var(--muted); max-width:32ch;">21 anos hoje. E eu, com sorte de te amar em todos os que ainda vêm.</p>
         <div data-reveal="" data-delay="140" style="font-family:var(--serif); font-style:italic; font-size:16px; color:var(--rose); opacity:0.94;">"bom dia, flor do dia."</div>
+        <sc-if value="{{ notStarted }}" hint-placeholder-val="{{ true }}">
         <button data-reveal="" data-delay="200" onClick="{{ startSurprise }}" style="margin-top:6px; font-family:var(--sans); font-size:14px; font-weight:500; letter-spacing:0.02em; color:var(--pearl); padding:15px 32px; border-radius:999px; border:1px solid rgba(255,255,255,0.18); background:linear-gradient(180deg,rgba(255,255,255,0.13),rgba(255,255,255,0.04)); backdrop-filter:blur(10px); cursor:pointer; box-shadow:0 0 0 1px rgba(255,150,190,0.12),0 18px 50px -22px rgba(255,150,190,0.85),inset 0 1px 0 rgba(255,255,255,0.2); transition:transform .25s, box-shadow .25s; -webkit-tap-highlight-color:transparent;" style-hover="transform:translateY(-2px); box-shadow:0 0 0 1px rgba(255,175,205,0.3),0 26px 62px -20px rgba(255,165,200,1),inset 0 1px 0 rgba(255,255,255,0.32);" style-active="transform:translateY(0) scale(0.98);">começar</button>
-        <sc-if value="{{ started }}" hint-placeholder-val="{{ true }}">
+        </sc-if>
+        <sc-if value="{{ started }}" hint-placeholder-val="{{ false }}">
         <div data-delay="300" style="font-family:var(--mono); font-size:9px; letter-spacing:0.26em; text-transform:uppercase; color:var(--muted); display:flex; align-items:center; gap:7px;"><span style="display:inline-block; width:6px; height:6px; border:1px solid var(--blue2); border-radius:50%; animation:shimmer 2.6s ease-in-out infinite;"></span>scrole a tela pra ver a surpresa</div>
         </sc-if>
       </div>
@@ -376,7 +378,7 @@ class Component extends DCLogic {
       audioRef: this.R.audio, videoRef: this.R.video,
       cdDaysRef: this.R.cdD, cdHoursRef: this.R.cdH, cdMinsRef: this.R.cdM, cdSecsRef: this.R.cdS,
       arcPathRef: this.R.arcPath, arcDotRef: this.R.arcDot,
-      nome, motivos, reunionText: this.reunionText(), started: this.state.started, tiltCue: this.state.tiltCue,
+      nome, motivos, reunionText: this.reunionText(), started: this.state.started, notStarted: !this.state.started, tiltCue: this.state.tiltCue,
       reunionArrived: arrived, reunionLocked: !arrived,
       modalVideo: this.state.modal === 'video', modalLetter: this.state.modal === 'letter',
       ytPlaying: !!this.state.ytEmbed, ytEmbed: this.state.ytEmbed, ytTitle: this.state.ytTitle,
