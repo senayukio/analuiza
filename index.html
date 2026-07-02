@@ -411,7 +411,7 @@ class Component extends DCLogic {
     this.enableTilt();
     const cue = !!this.mobile;
     if (!this.state.started) this.setState({ started: true, tiltCue: cue });
-    if (cue) { clearTimeout(this._tiltCueTO); this._tiltCueTO = setTimeout(() => this.setState({ tiltCue: false }), 5200); }
+    if (cue) { clearTimeout(this._tiltCueTO); this._tiltCueTO = setTimeout(() => this.setState({ tiltCue: false }), 3000); }
     setTimeout(() => { this._pLayers = null; if (this._checkReveals) this._checkReveals(); }, 80);
   }
 
