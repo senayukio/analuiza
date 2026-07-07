@@ -230,6 +230,38 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overfl
       </div>
     </section>
 
+    <!-- GALERIA / NOSSO ÁLBUM -->
+    <section id="sec-galeria" data-screen-label="Nosso álbum" style="max-width:680px; margin:0 auto; padding:20px 22px 84px; text-align:center;">
+      <div data-reveal="" style="font-family:var(--mono); font-size:10.5px; letter-spacing:0.3em; text-transform:uppercase; color:var(--rose); margin-bottom:14px;">o nosso álbum · {{ galTotal }} momentos</div>
+      <h2 data-reveal="" style="margin:0 0 10px; font-family:var(--serif); font-weight:500; font-size:clamp(28px,7.8vw,46px); line-height:1.1; color:var(--pearl);">A nossa história,<br>foto por foto</h2>
+      <p data-reveal="" data-delay="60" style="font-size:14px; line-height:1.7; color:var(--muted); max-width:32ch; margin:0 auto 6px;">Vinte e um momentos inesquecíveis ao seu lado, que o meu coração insiste em reviver.</p>
+      <p data-reveal="" data-delay="80" style="font-family:var(--mono); font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--blue2); margin:0 auto 26px; display:flex; align-items:center; justify-content:center; gap:8px;"><span style="font-size:13px;">↔</span>arraste pra passar · toque pra ampliar</p>
+
+      <div data-reveal="" data-delay="60" style="position:relative;">
+        <div ref="{{ galTrackRef }}" style="display:flex; gap:16px; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; padding:14px max(18px,calc(50% - 148px)) 20px; scrollbar-width:none; -ms-overflow-style:none;">
+          <sc-for list="{{ slides }}" as="s" hint-placeholder-count="21">
+            <div data-gal-card="" onClick="{{ s.onClick }}" style="scroll-snap-align:center; flex:0 0 auto; width:clamp(224px,72vw,296px); cursor:pointer; -webkit-tap-highlight-color:transparent; transform:scale(0.9); will-change:transform,opacity;">
+              <div style="position:relative; width:100%; aspect-ratio:3/4; border-radius:20px; overflow:hidden; border:1px solid rgba(255,255,255,0.14); background:#0a0c18; box-shadow:0 40px 70px -46px rgba(0,0,0,0.95),inset 0 1px 0 rgba(255,255,255,0.08),0 0 0 1px rgba(255,158,194,0.06);">
+                <img src="{{ s.src }}" alt="{{ s.alt }}" loading="lazy" decoding="async" draggable="false" style="width:100%; height:100%; object-fit:cover; display:block; pointer-events:none;">
+                <div style="position:absolute; inset:0; background:linear-gradient(180deg,transparent 58%,rgba(4,5,12,0.62)); pointer-events:none;"></div>
+                <div style="position:absolute; top:11px; left:12px; font-family:var(--mono); font-size:10px; font-weight:700; letter-spacing:0.14em; color:var(--pearl); background:rgba(6,8,18,0.55); backdrop-filter:blur(6px); padding:4px 9px; border-radius:999px; border:1px solid rgba(255,255,255,0.14);">{{ s.n }}</div>
+                <div style="position:absolute; bottom:11px; right:12px; width:32px; height:32px; border-radius:999px; border:1px solid rgba(255,255,255,0.28); background:rgba(6,8,18,0.4); backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center;"><span style="display:block; width:11px; height:11px; border:1.5px solid var(--pearl); border-radius:3px; box-shadow:5px 5px 0 -3px rgba(226,231,255,0.55);"></span></div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <button onClick="{{ galPrev }}" aria-label="foto anterior" style="position:absolute; top:50%; left:-2px; transform:translateY(-50%); z-index:3; width:44px; height:44px; border-radius:999px; border:1px solid rgba(255,255,255,0.18); background:rgba(10,12,26,0.66); backdrop-filter:blur(10px); color:var(--pearl); font-size:20px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 14px 30px -18px rgba(0,0,0,0.9); -webkit-tap-highlight-color:transparent;" style-hover="background:rgba(20,22,44,0.85); border-color:rgba(255,158,194,0.45);" style-active="transform:translateY(-50%) scale(0.92);">‹</button>
+        <button onClick="{{ galNext }}" aria-label="próxima foto" style="position:absolute; top:50%; right:-2px; transform:translateY(-50%); z-index:3; width:44px; height:44px; border-radius:999px; border:1px solid rgba(255,255,255,0.18); background:rgba(10,12,26,0.66); backdrop-filter:blur(10px); color:var(--pearl); font-size:20px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 14px 30px -18px rgba(0,0,0,0.9); -webkit-tap-highlight-color:transparent;" style-hover="background:rgba(20,22,44,0.85); border-color:rgba(255,158,194,0.45);" style-active="transform:translateY(-50%) scale(0.92);">›</button>
+      </div>
+
+      <div data-reveal="" data-delay="80" style="display:flex; align-items:center; justify-content:center; gap:14px; max-width:320px; margin:6px auto 0;">
+        <span style="font-family:var(--mono); font-weight:700; font-size:15px; letter-spacing:0.06em; color:var(--pearl); font-variant-numeric:tabular-nums;"><span ref="{{ galCounterRef }}">01</span><span style="color:var(--muted); font-weight:400;"> / {{ galTotal }}</span></span>
+        <span style="position:relative; flex:1; height:3px; border-radius:999px; background:rgba(255,255,255,0.1); overflow:hidden;"><span ref="{{ galBarRef }}" style="position:absolute; left:0; top:0; bottom:0; width:6%; border-radius:999px; background:linear-gradient(90deg,var(--rose),var(--blue2)); transition:width .18s ease;"></span></span>
+      </div>
+      <p data-reveal="" data-delay="100" style="font-family:var(--serif); font-style:italic; font-size:15px; color:var(--muted); text-align:center; margin:24px auto 0; max-width:30ch;">Com você, qualquer canto do mundo já é o meu lugar favorito.</p>
+    </section>
+
     <!-- REENCONTRO / COUNTDOWN -->
     <section id="sec-reencontro" data-screen-label="O reencontro" style="max-width:600px; margin:0 auto; padding:20px 22px 88px; text-align:center;">
       <div data-reveal="" style="font-family:var(--mono); font-size:10.5px; letter-spacing:0.3em; text-transform:uppercase; color:var(--brown); margin-bottom:14px;">02.09.2026&nbsp;·&nbsp;23:55</div>
@@ -343,6 +375,20 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overfl
     </div>
   </sc-if>
 
+  <!-- PHOTO LIGHTBOX -->
+  <sc-if value="{{ modalPhoto }}" hint-placeholder-val="{{ false }}">
+    <div ref="{{ lightboxRef }}" onClick="{{ closePhoto }}" style="position:fixed; inset:0; z-index:130; display:flex; align-items:center; justify-content:center; padding:64px 16px 28px; background:rgba(3,4,10,0.9); backdrop-filter:blur(16px);">
+      <div style="position:absolute; top:18px; left:0; right:0; display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:11px; letter-spacing:0.22em; color:var(--pearl); pointer-events:none;"><span style="font-variant-numeric:tabular-nums;">{{ photoNum }}</span><span style="color:var(--muted); margin:0 2px;">&nbsp;/&nbsp;{{ photoTotal }}</span></div>
+      <button onClick="{{ closePhoto }}" aria-label="fechar" style="position:absolute; top:14px; right:14px; z-index:4; width:38px; height:38px; border-radius:999px; border:1px solid var(--line); background:rgba(10,12,24,0.6); backdrop-filter:blur(8px); color:var(--pearl); font-size:19px; cursor:pointer; display:flex; align-items:center; justify-content:center;">×</button>
+      <div onClick="{{ stop }}" style="position:relative; display:flex; align-items:center; justify-content:center; gap:clamp(6px,3vw,20px); max-width:100%;">
+        <button onClick="{{ photoPrev }}" aria-label="foto anterior" style="flex:0 0 auto; width:46px; height:46px; border-radius:999px; border:1px solid rgba(255,255,255,0.2); background:rgba(10,12,26,0.7); backdrop-filter:blur(10px); color:var(--pearl); font-size:22px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; -webkit-tap-highlight-color:transparent;" style-hover="border-color:rgba(255,158,194,0.5);" style-active="transform:scale(0.92);">‹</button>
+        <img src="{{ photoSrc }}" alt="Foto do nosso álbum" draggable="false" style="max-width:min(78vw,520px); max-height:76vh; width:auto; height:auto; object-fit:contain; border-radius:18px; border:1px solid rgba(255,255,255,0.12); box-shadow:0 50px 100px -40px rgba(0,0,0,1); background:#0a0c18; display:block;">
+        <button onClick="{{ photoNext }}" aria-label="próxima foto" style="flex:0 0 auto; width:46px; height:46px; border-radius:999px; border:1px solid rgba(255,255,255,0.2); background:rgba(10,12,26,0.7); backdrop-filter:blur(10px); color:var(--pearl); font-size:22px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; -webkit-tap-highlight-color:transparent;" style-hover="border-color:rgba(255,158,194,0.5);" style-active="transform:scale(0.92);">›</button>
+      </div>
+      <div style="position:absolute; bottom:16px; left:0; right:0; text-align:center; font-family:var(--mono); font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); pointer-events:none;">arraste ou use as setas · esc pra fechar</div>
+    </div>
+  </sc-if>
+
   <!-- LETTER MODAL -->
   <sc-if value="{{ modalLetter }}" hint-placeholder-val="{{ false }}">
     <div onClick="{{ closeModal }}" style="position:fixed; inset:0; z-index:120; display:flex; align-items:flex-start; justify-content:center; padding:24px 18px; overflow:auto; background:rgba(4,5,12,0.74); backdrop-filter:blur(14px);">
@@ -391,13 +437,21 @@ const MOTIVOS = [
   "Você. Simplesmente você. O motivo que resume todos os 21."
 ];
 
+// 21 momentos escolhidos a dedo pros 21 anos dela (das 31 fotos originais)
+const SLIDE_PICKS = [1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 16, 17, 19, 20, 21, 23, 24, 25, 26, 27, 30];
+const NSLIDES = SLIDE_PICKS.length;
+const GALERIA = SLIDE_PICKS.map((num, i) => ({
+  src: 'assets/slide/' + num + '.jpeg',
+  n: String(i + 1).padStart(2, '0')
+}));
+
 class Component extends DCLogic {
-  state = { modal: null, playing: false, hint: true, arrived: false, started: false, tiltCue: false, ytOpen: false };
+  state = { modal: null, playing: false, hint: true, arrived: false, started: false, tiltCue: false, ytOpen: false, photo: null };
 
   renderVals() {
     if (!this.R) {
       const cr = () => React.createRef();
-      this.R = { root: cr(), bg: cr(), heart: cr(), heartPhoto: cr(), audio: cr(), video: cr(), cdD: cr(), cdH: cr(), cdM: cr(), cdS: cr(), arcPath: cr(), arcDot: cr(), ytBox: cr(), ytHost: cr(), gift: cr() };
+      this.R = { root: cr(), bg: cr(), heart: cr(), heartPhoto: cr(), audio: cr(), video: cr(), cdD: cr(), cdH: cr(), cdM: cr(), cdS: cr(), arcPath: cr(), arcDot: cr(), ytBox: cr(), ytHost: cr(), gift: cr(), galTrack: cr(), galCounter: cr(), galBar: cr(), lightbox: cr() };
     }
     const nome = this.props.nome || 'Ana Luiza';
     const hasVideo = !!(this.props.videoUrl && String(this.props.videoUrl).trim());
@@ -409,12 +463,24 @@ class Component extends DCLogic {
       text: t,
       onClick: (e) => this.flipCard(e.currentTarget)
     }));
+    const slides = GALERIA.map((g, i) => ({
+      src: g.src,
+      n: g.n,
+      alt: 'Um momento nosso · foto ' + (i + 1) + ' de ' + NSLIDES,
+      onClick: () => this.openPhoto(i)
+    }));
+    const pOpen = this.state.photo != null;
     return {
       rootRef: this.R.root, bgRef: this.R.bg, heartRef: this.R.heart, heartPhotoRef: this.R.heartPhoto,
       audioRef: this.R.audio, videoRef: this.R.video,
       cdDaysRef: this.R.cdD, cdHoursRef: this.R.cdH, cdMinsRef: this.R.cdM, cdSecsRef: this.R.cdS,
       arcPathRef: this.R.arcPath, arcDotRef: this.R.arcDot, giftRef: this.R.gift,
       nome, motivos, reunionText: this.reunionText(), started: this.state.started, notStarted: !this.state.started, tiltCue: this.state.tiltCue,
+      slides, galTrackRef: this.R.galTrack, galCounterRef: this.R.galCounter, galBarRef: this.R.galBar, galTotal: String(NSLIDES).padStart(2, '0'),
+      galPrev: () => this.galScroll(-1), galNext: () => this.galScroll(1),
+      lightboxRef: this.R.lightbox, modalPhoto: pOpen,
+      photoSrc: pOpen ? slides[this.state.photo].src : '', photoNum: pOpen ? slides[this.state.photo].n : '', photoTotal: String(NSLIDES).padStart(2, '0'),
+      photoPrev: () => this.photoNav(-1), photoNext: () => this.photoNav(1), closePhoto: () => this.closePhoto(),
       reunionArrived: arrived, reunionLocked: !arrived,
       modalVideo: this.state.modal === 'video', modalLetter: this.state.modal === 'letter',
       ytTitle: this.state.ytTitle, ytBoxRef: this.R.ytBox, ytHostRef: this.R.ytHost, ytMaxH: this.state.ytOpen ? '560px' : '0px', ytOpacity: this.state.ytOpen ? '1' : '0',
@@ -506,6 +572,95 @@ class Component extends DCLogic {
   }
 
   openModal(kind) { this.setState({ modal: kind, hint: false }); document.documentElement.style.overflow = 'hidden'; }
+
+  galScroll(dir) {
+    const t = this.R.galTrack.current; if (!t) return;
+    const card = t.querySelector('[data-gal-card]');
+    const step = card ? card.getBoundingClientRect().width + 16 : t.clientWidth * 0.8;
+    const max = t.scrollWidth - t.clientWidth;
+    const target = Math.max(0, Math.min(max, t.scrollLeft + dir * step));
+    // scroll-snap-type: mandatory cancels native smooth scroll, so animate scrollLeft directly
+    if (this._galAnim) cancelAnimationFrame(this._galAnim);
+    if (this.reduced) { t.scrollLeft = target; this.galSync(); return; }
+    t.style.scrollSnapType = 'none'; // mandatory snap re-snaps intermediate scrollLeft, so pause it during the tween
+    const from = t.scrollLeft, t0 = performance.now(), dur = 420;
+    const tick = (now) => {
+      let p = (now - t0) / dur; if (p > 1) p = 1;
+      const e = 1 - Math.pow(1 - p, 3);
+      t.scrollLeft = from + (target - from) * e;
+      if (p < 1) { this._galAnim = requestAnimationFrame(tick); }
+      else { this._galAnim = 0; t.style.scrollSnapType = ''; }
+    };
+    this._galAnim = requestAnimationFrame(tick);
+  }
+  galSync() {
+    const t = this.R.galTrack.current; if (!t) return;
+    const cards = t.querySelectorAll('[data-gal-card]');
+    if (!cards.length) return;
+    const tr = t.getBoundingClientRect();
+    const mid = tr.left + tr.width / 2;
+    // Pass 1: read all geometry BEFORE writing any transform. Writing mid-loop
+    // forces reflow and mandatory snap can shift scrollLeft, corrupting later reads.
+    let active = 0, best = Infinity;
+    const dists = new Array(cards.length);
+    for (let i = 0; i < cards.length; i++) {
+      const cr = cards[i].getBoundingClientRect();
+      const dist = Math.abs(cr.left + cr.width / 2 - mid);
+      dists[i] = dist;
+      if (dist < best) { best = dist; active = i; }
+    }
+    // Pass 2: write transforms/opacity from the cached distances.
+    if (!this.reduced) {
+      const span = tr.width * 0.72;
+      for (let i = 0; i < cards.length; i++) {
+        const k = Math.max(0, 1 - dists[i] / span);
+        cards[i].style.transform = 'scale(' + (0.84 + 0.16 * k).toFixed(3) + ')';
+        cards[i].style.opacity = (0.4 + 0.6 * k).toFixed(3);
+      }
+    }
+    if (this.R.galCounter.current) this.R.galCounter.current.textContent = String(active + 1).padStart(2, '0');
+    if (this.R.galBar.current) {
+      const denom = (t.scrollWidth - t.clientWidth) || 1;
+      const p = Math.max(0, Math.min(1, t.scrollLeft / denom));
+      this.R.galBar.current.style.width = (6 + p * 94) + '%';
+    }
+  }
+  galBindMaybe() {
+    const t = this.R.galTrack.current;
+    if (!t || this._galBound) return;
+    this._galBound = true;
+    this._onGalScroll = () => { if (this._galRaf) return; this._galRaf = requestAnimationFrame(() => { this._galRaf = 0; this.galSync(); }); };
+    t.addEventListener('scroll', this._onGalScroll, { passive: true });
+    this.galSync();
+    setTimeout(() => this.galSync(), 120);
+    setTimeout(() => this.galSync(), 500);
+  }
+
+  openPhoto(i) { this.setState({ photo: i, hint: false }); document.documentElement.style.overflow = 'hidden'; }
+  closePhoto() { this.setState({ photo: null }); document.documentElement.style.overflow = ''; }
+  photoNav(dir) {
+    this.setState((s) => {
+      if (s.photo == null) return {};
+      let n = s.photo + dir;
+      if (n < 0) n = NSLIDES - 1;
+      if (n > NSLIDES - 1) n = 0;
+      return { photo: n };
+    });
+  }
+  lbBind() {
+    const el = this.R.lightbox.current;
+    if (!el || this._lbBound) return;
+    this._lbBound = true;
+    this._lbStart = (e) => { const t = e.touches && e.touches[0]; this._lbX = t ? t.clientX : 0; };
+    this._lbEnd = (e) => { const t = e.changedTouches && e.changedTouches[0]; if (!t) return; const dx = t.clientX - (this._lbX || 0); if (Math.abs(dx) > 44) this.photoNav(dx < 0 ? 1 : -1); };
+    el.addEventListener('touchstart', this._lbStart, { passive: true });
+    el.addEventListener('touchend', this._lbEnd, { passive: true });
+  }
+  lbUnbind() {
+    const el = this.R.lightbox.current;
+    if (el && this._lbBound) { el.removeEventListener('touchstart', this._lbStart); el.removeEventListener('touchend', this._lbEnd); }
+    this._lbBound = false;
+  }
   ensureYT() {
     if (this._ytPlayer) return;
     const host = this.R.ytHost && this.R.ytHost.current;
@@ -574,7 +729,15 @@ class Component extends DCLogic {
       this._tX = Math.max(-1, Math.min(1, (e.gamma || 0) / 24));
       this._tY = Math.max(-1, Math.min(1, ((e.beta || 0) - 40) / 30));
     };
-    this._onKey = (e) => { if (e.key === 'Escape' && this.state.modal) this.closeModal(); };
+    this._onKey = (e) => {
+      if (this.state.photo != null) {
+        if (e.key === 'Escape') this.closePhoto();
+        else if (e.key === 'ArrowRight') this.photoNav(1);
+        else if (e.key === 'ArrowLeft') this.photoNav(-1);
+        return;
+      }
+      if (e.key === 'Escape' && this.state.modal) this.closeModal();
+    };
     window.addEventListener('keydown', this._onKey);
     this._hintTO = setTimeout(() => this.setState((s) => (s.playing ? {} : { hint: false })), 9000);
     this.whenTHREE(() => {
@@ -584,6 +747,8 @@ class Component extends DCLogic {
   }
 
   componentDidUpdate(prev) {
+    if (this.state.started) this.galBindMaybe();
+    if (this.state.photo != null) this.lbBind(); else this.lbUnbind();
     if (this.state.started && !this._ytPlayer) this.ensureYT();
     if (this.state.started && !this.gift && window.THREE) { try { this.initGift(); setTimeout(() => this.resizeGift(), 60); } catch (e) { console.warn('gift init failed', e); } }
     if (prev.audioUrl !== this.props.audioUrl && this.R.audio.current) {
@@ -604,6 +769,10 @@ class Component extends DCLogic {
     if (this._onMove) window.removeEventListener('pointermove', this._onMove);
     if (this._onTilt) window.removeEventListener('deviceorientation', this._onTilt);
     window.removeEventListener('keydown', this._onKey);
+    if (this._galBound && this.R.galTrack.current) this.R.galTrack.current.removeEventListener('scroll', this._onGalScroll);
+    if (this._galRaf) cancelAnimationFrame(this._galRaf);
+    if (this._galAnim) cancelAnimationFrame(this._galAnim);
+    this.lbUnbind();
   }
 
   whenTHREE(cb, n = 0) {
